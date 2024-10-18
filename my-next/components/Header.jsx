@@ -4,12 +4,13 @@ import { nav } from '@/styles/Header.module.css';
 const
     pages = [
         { href: '/', name: 'Home' },
-        { href: '/like-buttons', name: 'Like-Buttons Demo' }
+        { href: '/like-buttons', name: 'Like-Buttons Demo' },
+        { href: '/todoList', name: 'ToDo List'}
     ]
 
 export function Header() {
     return <header>
-        Header TODO LIst
+        
         <nav className={nav}>
             <ul>
                 {pages.map(page =>
@@ -17,5 +18,6 @@ export function Header() {
                 )}
             </ul>
         </nav>
+        <br/>
     </header>
 }

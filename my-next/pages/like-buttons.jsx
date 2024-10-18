@@ -6,6 +6,6 @@ export default function LBPage() {
         <LikeButton big step="11"/>
         <LikeButton start ={100}/>
         <LikeButton color = "red" border/>
-
+        
     </div>
 }

@@ -5,7 +5,7 @@ export default function Home() {
       
       <div>
         
-          Hello NExtJS!!!
+          Projects NExtJS!!!
           
       </div>
       
