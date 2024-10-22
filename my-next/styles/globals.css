@@ -38,9 +38,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
-.list{
-  text-align: center;
-}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

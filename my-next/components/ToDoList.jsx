@@ -36,7 +36,7 @@ export function ToDoList() {
         setTasks(updatedTasks);
     };
 
-    return (<div className="list">
+    return (<div>
         <p>TODO List</p>
         <input
             placeholder="Введите задачу ..."
