@@ -6,7 +6,8 @@ const
         { href: '/', name: 'Home' },
         { href: '/like-buttons', name: 'Like-Buttons Demo' },
         { href: '/todoList', name: 'ToDo List'},
-        {href: '/stand', name: 'Lifecycle-methods'}
+        {href: '/stand', name: 'Lifecycle-methods'},
+        {href: '/users', name: 'JSON Placeholder Users'},
     ]
 
 export function Header() {
