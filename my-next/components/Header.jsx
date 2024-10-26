@@ -5,7 +5,8 @@ const
     pages = [
         { href: '/', name: 'Home' },
         { href: '/like-buttons', name: 'Like-Buttons Demo' },
-        { href: '/todoList', name: 'ToDo List'}
+        { href: '/todoList', name: 'ToDo List'},
+        {href: '/stand', name: 'Lifecycle-methods'}
     ]
 
 export function Header() {

@@ -30,6 +30,11 @@ body {
   margin: 0;
 }
 
+.ChildClass{
+  margin: 10px;
+  padding-top: 5px;
+}
+
 button {
   margin: 0.3em;
 }
