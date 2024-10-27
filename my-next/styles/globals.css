@@ -30,12 +30,28 @@ body {
   margin: 0;
 }
 
-.ChildClass{
+.ChildClass {
   margin: 10px;
   padding-top: 5px;
 }
 
-.error{
+.parantTodo {
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+  
+}
+fieldset{
+  padding: 5px;
+  margin: 10px;
+  border-radius: 5px;
+  text-align: left;
+}
+fieldset ol{
+  padding-left: 20px;
+}
+
+.error {
   color: red;
 }
 

@@ -1,4 +1,4 @@
-import { ToDoList } from '@/components/ToDoList';
+import { ToDoList } from '@/components/ToDoListClass';
 
 export default function ToDoPage() {
     return <div>

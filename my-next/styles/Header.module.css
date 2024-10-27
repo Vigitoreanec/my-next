@@ -1,6 +1,14 @@
-.nav ul{
+.nav ul {
     list-style-type: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     color: brown;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    & li {
+        padding: 0.1em;
+        border-radius: 0.1em;
+        box-shadow: 0 0 5px gray;
+    }
 }

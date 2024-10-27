@@ -4,22 +4,26 @@ import { nav } from '@/styles/Header.module.css';
 const
     pages = [
         { href: '/', name: 'Home' },
+        { href: '/todo-optimization', name: 'ToDo List (Optimization)' },
         { href: '/like-buttons', name: 'Like-Buttons Demo' },
-        { href: '/todoList', name: 'ToDo List'},
-        {href: '/stand', name: 'Lifecycle-methods'},
-        {href: '/users', name: 'JSON Placeholder Users'},
+        { href: '/todoList', name: 'ToDo List (CLASS)' },
+        { href: '/stand', name: 'Lifecycle-methods' },
+        { href: '/users', name: 'JSON Placeholder Users' }
+
     ]
 
 export function Header() {
     return <header>
-        
+
         <nav className={nav}>
             <ul>
                 {pages.map(page =>
-                    <Link href={page.href} key={page.href}>{page.name}</Link>
+                    <li key={page.href}>
+                        <Link href={page.href} >{page.name}</Link>
+                    </li>
                 )}
             </ul>
         </nav>
-        <br/>
+        <br />
     </header>
 }
