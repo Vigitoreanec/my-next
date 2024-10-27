@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useState, useCallback, memo, useRef } from "react"
 
 export function ToDoApp() {
     const
@@ -7,21 +7,23 @@ export function ToDoApp() {
             new ListItem('Дело №1'),
             new ListItem('Дело №2')
         ]),
-        delItem = id => setList(prev => {
+        delItem = useCallback(id => setList(prev => {
             const
                 index = prev.findIndex(item => item.id == id);
             // return prev.toSpliced(index, 1)
             return prev.filter(item => item.id != id)
-        }),
-        checkedCheckBox = id => setList(prev => {
+        }), []),
+        checkedCheckBox = useCallback(id => setList(prev => {
             const
                 index = prev.findIndex(item => item.id == id);
-            return prev.with(index, prev[index].itemChecked())
-        });
+            return prev.with(index, prev[index].cloneAndItemChecked())
+        }), []),
+        addItem = useCallback(text =>
+            setList(prev => [...prev, new ListItem(text)]), []);
 
     return <fieldset>
-        <legend>ToDo App</legend>
-        <Form addItem={text => setList(prev => [...prev, new ListItem(text)])} />
+        <legend>To Do App</legend>
+        <Form addItem={addItem} />
         <List
             list={list}
             delItem={delItem}
@@ -30,24 +32,29 @@ export function ToDoApp() {
     </fieldset>
 }
 
-function Form({ addItem }) {// функция тунель для дочергено компонента, пробрасываем пропс
+const Form = memo(function ({ addItem }) {// функция тунель для дочергено компонента, пробрасываем пропс
     console.debug('Form');
     const
-        [value, setValue] = useState('-value-');
+        [value, setValue] = useState('-value-'),        //value->button 
+        ref = useRef(null),
+        onClicked = useCallback(() => {
+            addItem(ref.current);
+            setValue('')
+        }, []);
+
+    ref.current = value;
+
     return <fieldset>
         <legend>Form</legend>
         <input
             value={value}
             // onInput={event => setValue(event.target.value)
             onInput={({ target: { value } }) => setValue(value)} />
-        <Button onClicked={() => {
-            addItem(value);
-            setValue('')
-        }}>
+        <Button onClicked={onClicked}>                  {/*button-> value */}
             Add
         </Button> {/* // компонент функция */}
     </fieldset>
-}
+});
 
 function List({ list, delItem, checkedCheckBox }) {
     console.debug('List');
@@ -62,9 +69,11 @@ function List({ list, delItem, checkedCheckBox }) {
     </fieldset>
 }
 
-function Item({ item, delItem, checkedCheckBox }) {
+const Item = memo(function ({ item, delItem, checkedCheckBox }) {
+    console.debug('Item', item);
     const
-        { id, checked, text } = item;
+        { id, checked, text } = item,
+        onClicked = useCallback(() => delItem(id), [id]);
     return <li>
         <input
             type="checkbox"
@@ -74,25 +83,28 @@ function Item({ item, delItem, checkedCheckBox }) {
             style={{ textDecoration: checked ? 'line-through' : 'none' }}>
             {text}
         </span>
-        <Button onClicked={() => delItem(id)}>✖</Button>
+        <Button onClicked={onClicked}>✖</Button>
     </li>
-}
+});
 
-function Button({ onClicked, children }) { // props 'onClick', children - псевдо-пропс для потомков
-    console.debug('Button');
+const Button = memo(function ({ onClicked, children }) { // props 'onClick', children - псевдо-пропс для потомков
+    console.debug('Button',children);
     return <button onClick={onClicked}> {children} </button>
-}
+});
 
 class ListItem {
     checked = false;
     id = Math.random();
 
     constructor(text) {
-        Object.assign(this, { text });
+        Object.assign(this, { text });  // this.text = text
     }
 
-    itemChecked() {
+    cloneAndItemChecked() {
+        const
+            clone = new ListItem;
+        Object.assign(clone, this, { checked: !this.checked });
         this.checked = !this.checked;
-        return this;
+        return clone;
     }
 }
