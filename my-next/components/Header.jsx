@@ -8,7 +8,8 @@ const
         { href: '/like-buttons', name: 'Like-Buttons Demo' },
         { href: '/todoList', name: 'ToDo List (CLASS)' },
         { href: '/stand', name: 'Lifecycle-methods' },
-        { href: '/users', name: 'JSON Placeholder Users' }
+        { href: '/users', name: 'JSON Placeholder Users' },
+        { href: '/calendar', name: 'Calendar Demo' }
 
     ]
 

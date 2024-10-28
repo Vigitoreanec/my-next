@@ -8,8 +8,8 @@ export function ToDoApp() {
             new ListItem('Дело №2')
         ]),
         delItem = useCallback(id => setList(prev => {
-            const
-                index = prev.findIndex(item => item.id == id);
+            // const
+            //     index = prev.findIndex(item => item.id == id);
             // return prev.toSpliced(index, 1)
             return prev.filter(item => item.id != id)
         }), []),
@@ -50,7 +50,9 @@ const Form = memo(function ({ addItem }) {// функция тунель для 
             value={value}
             // onInput={event => setValue(event.target.value)
             onInput={({ target: { value } }) => setValue(value)} />
-        <Button onClicked={onClicked}>                  {/*button-> value */}
+
+        {/*button-> value */}
+        <Button onClicked={onClicked}>
             Add
         </Button> {/* // компонент функция */}
     </fieldset>
@@ -88,7 +90,7 @@ const Item = memo(function ({ item, delItem, checkedCheckBox }) {
 });
 
 const Button = memo(function ({ onClicked, children }) { // props 'onClick', children - псевдо-пропс для потомков
-    console.debug('Button',children);
+    console.debug('Button', children);
     return <button onClick={onClicked}> {children} </button>
 });
 
@@ -104,7 +106,7 @@ class ListItem {
         const
             clone = new ListItem;
         Object.assign(clone, this, { checked: !this.checked });
-        this.checked = !this.checked;
+        // this.checked = !this.checked;
         return clone;
     }
 }

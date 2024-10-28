@@ -1,0 +1,9 @@
+classes.calendar{
+border-collapse: collapse;
+& td{
+    border: 1px solid lavender;
+    text-align: center;
+    cursor: pointer;
+}
+
+}
