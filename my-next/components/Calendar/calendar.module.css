@@ -1,7 +1,7 @@
 classes.calendar{
 border-collapse: collapse;
 & td{
-    border: 1px solid lavender;
+    border: 1px solid rgb(206, 206, 206);
     text-align: center;
     cursor: pointer;
 }

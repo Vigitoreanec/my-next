@@ -1,8 +1,20 @@
-import {classes} from './calendar.module.css'
+import { useState } from 'react';
+import classes from './calendar.module.css'
 
 export function DemoCalendarApp() {
+    const
+        [locale, setLocale] = useState('ru');
+    
     return <div>
         <h1>Календарь</h1>
+        <label>
+        locale:
+        <select value={locale} onChange={event => setLocale(event.target.value)}>
+            {['ru', 'en', 'ar', 'zh', 'ko', 'ja']
+                .map(l => <option key={l} value={l}>{l}</option>)}
+        </select>
+    </label>
+
         <Calendar date={new Date} />
     </div>
 }
@@ -33,10 +45,10 @@ function Month({ shift, max }) {
 function Week({ start, max }) {
     const
         arr = [];
-    for (let day = start; day < start + 7; day++) 
+    for (let day = start; day < start + 7; day++)
         arr.push(<td key={day}>
             {day >= 1 && day <= max && day}
         </td>);
-    
+
     return <tr>{arr}</tr>
 }
