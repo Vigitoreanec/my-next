@@ -1,9 +1,16 @@
-classes.calendar{
+table.calendar{
 border-collapse: collapse;
 & td{
     border: 1px solid rgb(206, 206, 206);
     text-align: center;
     cursor: pointer;
+    &:nth-child(6),
+    &:nth-child(7){
+        color: red;
+    }
 }
-
+& .selected{
+    background-color: lime;
+    border-radius: 50%;
+}
 }
