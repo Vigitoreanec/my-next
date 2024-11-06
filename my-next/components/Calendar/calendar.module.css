@@ -1,16 +1,27 @@
-table.calendar{
-border-collapse: collapse;
-& td{
-    border: 1px solid rgb(206, 206, 206);
-    text-align: center;
-    cursor: pointer;
-    &:nth-child(6),
-    &:nth-child(7){
-        color: red;
+table.calendar {
+    border-collapse: collapse;
+
+    & td{
+        border: 1px solid rgb(206, 206, 206);
+        text-align: center;
+        cursor: pointer;
+
+        &:nth-child(6),
+        &:nth-child(7) {
+            color: red;
+        }
+
+        &.selected {
+            background-color: rgb(137, 137, 206);
+            border-radius: 50%;
+        }
     }
 }
-& .selected{
-    background-color: lime;
-    border-radius: 50%;
-}
-}
+.flex {
+    display: flex;
+    flex-direction: column;
+  }
+  .center {
+    align-items: center;
+  }
+  
