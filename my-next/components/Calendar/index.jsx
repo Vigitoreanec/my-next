@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useMemo, useRef, useState } from 'react';
 import classes from './calendar.module.css';
 import { LocaleContext } from './LocaleCalendar';
 
@@ -17,10 +17,12 @@ export function DemoCalendarApp() {
             </select>
         </label>
         <LocaleContext.Provider value={locale} >
+            <DemoGiven />
+            <PopUpDemo />
+            <DemoRezult/>
+            <DemoSelectDate />
             <Demo1 />
             <Demo2 />
-            <Demo3 />
-            <Demo4 />
         </LocaleContext.Provider>
     </div>
 }
@@ -42,13 +44,13 @@ function Demo2() {
     </LocaleContext.Provider>
 }
 
-function Demo3() {
+function DemoGiven() {
     return <fieldset>
         <input type='date' />
     </fieldset>
 }
 
-function Demo4() {
+function DemoSelectDate() {
     const
         [date, setDate] = useState(new Date)
     // [value, setValue] = useState(50)
@@ -146,4 +148,57 @@ function Calendar({ date }) {
         <Month shift={shift} max={max} />
     </table>
 }
+function PopUpDemo() {
+    const [open, setOpen] = useState(false);
+    return <fieldset>
+        <legend>Demo Pop Up</legend>
+        <button onClick={() => setOpen(true)}>Open</button>
+        {open && <PopUpWindow>
+            <button onClick={() => setOpen(false)}>❌</button>
+            <svg width="100%" height="100%" viewBox="-10.5 -9.45 21 18.9" fill="none" xmlns="http://www.w3.org/2000/svg" >
 
+                <circle cx="0" cy="0" r="2" fill="currentColor"></circle><g stroke="currentColor" strokeWidth="1" fill="none"><ellipse rx="10" ry="4.5"></ellipse><ellipse rx="10" ry="4.5" transform="rotate(60)"></ellipse><ellipse rx="10" ry="4.5" transform="rotate(120)"></ellipse></g></svg>
+
+        </PopUpWindow>}
+    </fieldset>
+}
+function PopUpWindow({ children }) {
+    return <div className={classes.popup}>
+        {children}
+    </div>
+}
+
+function DemoRezult(){
+    const
+    [date, setDate] = useState(new Date),
+    [open, setOpen] = useState(false),
+    savedDate = useRef(null);
+
+  return <fieldset>
+    <div
+      onClick={() => {
+        savedDate.current = date;        //save
+        setOpen(true);
+      }}
+      className={classes.dateindicator}
+    >
+
+      {date.toLocaleDateString()}
+    </div>
+    {open && <PopUpWindow>
+      <SelectDate date={date} setDate={setDate} />
+      <button
+        onClick={() => {
+          setDate(savedDate.current);
+          setOpen(false)
+        }}
+      >
+        ❌Отменить
+      </button>
+      <button
+        onClick={() => setOpen(false)}
+      >✔Применить
+      </button>
+    </PopUpWindow>}
+  </fieldset>;
+}

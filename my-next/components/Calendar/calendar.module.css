@@ -1,7 +1,7 @@
 table.calendar {
     border-collapse: collapse;
 
-    & td{
+    & td {
         border: 1px solid rgb(206, 206, 206);
         text-align: center;
         cursor: pointer;
@@ -17,11 +17,32 @@ table.calendar {
         }
     }
 }
+
 .flex {
     display: flex;
     flex-direction: column;
-  }
-  .center {
+}
+
+.center {
     align-items: center;
-  }
-  
+}
+
+.popup {
+    position: absolute;
+    box-shadow: 0 0 12px 2px gray;
+    background-color: whitesmoke;
+}
+
+.dateindicator {
+    border: 1px solid gray;
+    width: 6em;
+
+    &::after {
+        content: '📆';
+    }
+}
+
+.close {
+    position: absolute;
+    right: 0;
+}
