@@ -23,6 +23,11 @@ table.calendar {
     flex-direction: column;
 }
 
+.textDate {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
 .center {
     align-items: center;
 }
@@ -31,6 +36,19 @@ table.calendar {
     position: absolute;
     box-shadow: 0 0 12px 2px gray;
     background-color: whitesmoke;
+}
+
+.noselected {
+    & tbody tr td.selected {
+        background-color: unset;
+        border-radius: unset
+    }
+}
+
+table.nocaption {
+    & caption {
+        display: none;
+    }
 }
 
 .dateindicator {

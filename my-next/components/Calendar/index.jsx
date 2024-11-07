@@ -1,4 +1,4 @@
-import { useContext, useMemo, useRef, useState } from 'react';
+import { useContext, useMemo, useRef, useState,memo } from 'react';
 import classes from './calendar.module.css';
 import { LocaleContext } from './LocaleCalendar';
 
@@ -19,10 +19,10 @@ export function DemoCalendarApp() {
         <LocaleContext.Provider value={locale} >
             <DemoGiven />
             <PopUpDemo />
-            <DemoRezult/>
+            <DemoRezult />
             <DemoSelectDate />
             <Demo1 />
-            <Demo2 />
+            <DemoCalendareKOREA />
         </LocaleContext.Provider>
     </div>
 }
@@ -32,14 +32,14 @@ function Demo1() {
         [value, setValue] = useState(DateToYYYYMM(new Date));
     return <fieldset>
         <input type='month' value={value} onChange={event => setValue(event.target.value)} />
-        <Calendar date={YYYYMMToDate(value)} />
+        <Calendar date={YYYYMMToDate(value)} addClass={classes.noselected} />
     </fieldset>
 }
 
-function Demo2() {
+function DemoCalendareKOREA() {
     return <LocaleContext.Provider value='ko'>
         <fieldset value="KOREA">
-            <Calendar date={new Date} />
+            <Calendar date={new Date} addClass={classes.noselected} />
         </fieldset>
     </LocaleContext.Provider>
 }
@@ -52,12 +52,12 @@ function DemoGiven() {
 
 function DemoSelectDate() {
     const
-        [date, setDate] = useState(new Date)
-    // [value, setValue] = useState(50)
+        [date, setDate] = useState(new Date),
+        [value, setValue] = useState(50)
     return <fieldset>
         <legend>Select Date</legend>
-        {/* <input type="range" value={value} onChange={event => setValue(event.target.value)} />{value} */}
-        <div>
+        <input type="range" value={value} onChange={event => setValue(event.target.value)} />{value}
+        <div className={classes.textDate}>
             {date.toLocaleDateString('ru',
                 { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
         </div>
@@ -77,7 +77,7 @@ function SelectDate({ date, setDate }) {
             if (!days) return;
             setDate(new Date(year, month, days));
         };
-    return <div>
+    return <div className={classes.flex + ' ' + classes.center}>
         <div>
             <input
                 onChange={event => setDate(new Date(+event.target.value, month, day))}
@@ -90,7 +90,7 @@ function SelectDate({ date, setDate }) {
             <button onClick={() => setDate(new Date(year, month + 1, day))}>→</button>
         </div>
         <div onClick={onClick}>
-            <Calendar date={date} />
+            <Calendar date={date} addClass={classes.nocaption} />
         </div>
     </div>
 }
@@ -104,7 +104,7 @@ function YYYYMMToDate(str) {
     return new Date(year, month - 1, 1);
 }
 
-function Calendar({ date }) {
+const Calendar = memo(function Calendare({ date, addClass = '' }) {
     const
         locale = useContext(LocaleContext),
         dayNames = useMemo(() =>
@@ -140,14 +140,16 @@ function Calendar({ date }) {
 
             return <tr>{arr}</tr>
         };
+    console.debug('Calendare', date, addClass); //rerander
 
-    return <table className={classes.calendar}>
+    return <table className={classes.calendar + ' ' + addClass}>
         {/* <caption>{month}-{year}</caption> */}
         <caption>{caption}</caption>
         <thead><tr>{dayNames}</tr></thead>
         <Month shift={shift} max={max} />
     </table>
-}
+});
+
 function PopUpDemo() {
     const [open, setOpen] = useState(false);
     return <fieldset>
@@ -168,37 +170,37 @@ function PopUpWindow({ children }) {
     </div>
 }
 
-function DemoRezult(){
+function DemoRezult() {
     const
-    [date, setDate] = useState(new Date),
-    [open, setOpen] = useState(false),
-    savedDate = useRef(null);
+        [date, setDate] = useState(new Date),
+        [open, setOpen] = useState(false),
+        savedDate = useRef(null);
 
-  return <fieldset>
-    <div
-      onClick={() => {
-        savedDate.current = date;        //save
-        setOpen(true);
-      }}
-      className={classes.dateindicator}
-    >
+    return <fieldset>
+        <div
+            onClick={() => {
+                savedDate.current = date;        //save useRef
+                setOpen(true);                  // close
+            }}
+            className={classes.dateindicator}
+        >
 
-      {date.toLocaleDateString()}
-    </div>
-    {open && <PopUpWindow>
-      <SelectDate date={date} setDate={setDate} />
-      <button
-        onClick={() => {
-          setDate(savedDate.current);
-          setOpen(false)
-        }}
-      >
-        ❌Отменить
-      </button>
-      <button
-        onClick={() => setOpen(false)}
-      >✔Применить
-      </button>
-    </PopUpWindow>}
-  </fieldset>;
+            {date.toLocaleDateString()}
+        </div>
+        {open && <PopUpWindow>
+            <SelectDate date={date} setDate={setDate} />
+            <button
+                onClick={() => {
+                    setDate(savedDate.current); // restore
+                    setOpen(false);               // close
+                }}
+            >
+                ❌Отменить
+            </button>
+            <button
+                onClick={() => setOpen(false)}
+            >✔Применить
+            </button>
+        </PopUpWindow>}
+    </fieldset>;
 }
