@@ -73,7 +73,7 @@ function SelectDate({ date, setDate }) {
         day = date.getDate(),
         onClick = event => {
             const
-                days = +event.target.closest('table.' + classes.calendar + 'tbody td')?.textContent;
+                days = +event.target.closest('table.' + classes.calendar + ' tbody td')?.textContent;
             if (!days) return;
             setDate(new Date(year, month, days));
         };
