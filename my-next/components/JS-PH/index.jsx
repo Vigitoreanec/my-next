@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { User } from "./User";
+import { Spiner } from "./Spiner";
 
 export function GetUser() {
     const
@@ -43,6 +44,3 @@ function FetchUser({ id }) {
     return <Spiner />
 }
 
-function Spiner() {
-    return <div><process></process></div>
-}

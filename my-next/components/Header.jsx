@@ -9,7 +9,8 @@ const
         { href: '/todoList', name: 'ToDo List (CLASS)' },
         { href: '/stand', name: 'Lifecycle-methods' },
         { href: '/users', name: 'JSON Placeholder Users' },
-        { href: '/calendar', name: 'Calendar Demo' }
+        { href: '/calendar', name: 'Calendar Demo' },
+        { href: '/fetcher', name: 'Fetcher' }
 
     ]
 
