@@ -5,11 +5,11 @@ export function User({ user }) {
         { id, name, email, phone } = user;
         
     return <fieldset>
-<ul>
+<ol>
     <li>id: {user.id}</li>
     <li>Name: {user.name}</li>
     <li>Email: {user.email}</li>
     <li>Phone: {user.phone}</li>
-</ul>
+</ol>
     </fieldset>
 }

@@ -13,7 +13,7 @@ export function GetUser() {
 
 function FetchUser({ id }) {
     const
-        [user, setUser] = useState(null),
+        [user, setUser] = useState(1),
         [error, setError] = useState(null);
 
     useEffect(() => {
@@ -33,6 +33,7 @@ function FetchUser({ id }) {
         }
         load();
     }, [id]);
+
     if (error)
         return <span className="error">
             Error {error.toString()}
@@ -41,6 +42,7 @@ function FetchUser({ id }) {
         return <User user={user} />
     return <Spiner />
 }
+
 function Spiner() {
-    return <process></process>
+    return <div><process></process></div>
 }
