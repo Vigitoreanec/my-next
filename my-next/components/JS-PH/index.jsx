@@ -4,7 +4,7 @@ import { User } from "./User";
 
 export function GetUser() {
     const
-        [id, setId] = useState(1);
+        [id, setId] = useState(null);
     return <div>
         <input type="number" value={id} onInput={event => setId(+event.target.value)} />
         <FetchUser id={id} />
