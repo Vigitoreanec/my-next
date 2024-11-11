@@ -10,7 +10,8 @@ const
         { href: '/stand', name: 'Lifecycle-methods' },
         { href: '/users', name: 'JSON Placeholder Users' },
         { href: '/calendar', name: 'Calendar Demo' },
-        { href: '/fetcher', name: 'Fetcher' }
+        { href: '/fetcher', name: 'Fetcher' },
+        { href: '/objectTable', name: 'TableUsers' }
 
     ]
 

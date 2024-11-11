@@ -50,12 +50,14 @@ function Test3() {
         <legend>Fetcher Button</legend>
         {date
             ? <UserList users={date} />
+
             : <button onClick={() => {
                 fetch('https://jsonplaceholder.typicode.com/users/')
                     .then(res => res.json())
                     .then(users => setDate(users));
             }}>load</button>
         }
+        {date && <button onClick={() => setDate(null)}>✖</button>}
 
     </fieldset >
 }
