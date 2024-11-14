@@ -11,7 +11,8 @@ const
         { href: '/users', name: 'JSON Placeholder Users' },
         { href: '/calendar', name: 'Calendar Demo' },
         { href: '/fetcher', name: 'Fetcher' },
-        { href: '/objectTable', name: 'TableUsers' }
+        { href: '/objectTable', name: 'TableUsers' },
+        { href: '/modification', name: 'Server Modification(Optim UI)' }
 
     ]
 

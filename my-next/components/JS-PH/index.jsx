@@ -5,7 +5,7 @@ import { Spiner } from "./Spiner";
 
 export function GetUser() {
     const
-        [id, setId] = useState(null);
+        [id, setId] = useState(1);
     return <div>
         <input type="number" value={id} onInput={event => setId(+event.target.value)} />
         <FetchUser id={id} />
@@ -14,7 +14,7 @@ export function GetUser() {
 
 function FetchUser({ id }) {
     const
-        [user, setUser] = useState(1),
+        [user, setUser] = useState(null),
         [error, setError] = useState(null);
 
     useEffect(() => {
